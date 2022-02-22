@@ -1,19 +1,37 @@
 const { remote } = require("webdriverio");
 const fs = require("fs/promises");
 const path = require("path");
-const { v4 } = require("uuid");
 const LINKSPATH = path.join(__dirname, "links.json");
 const DATAPATH = path.join(__dirname, "data.json");
-let id = 0;
-const writeData = async (designationNumber, title, status) => {
-  if (!designationNumber || !title || !status) {
+
+const writeData = async (
+  designationNumber,
+  title,
+  status,
+  recognitionDate,
+  linkOfStandart
+) => {
+  if (
+    !designationNumber ||
+    !title ||
+    !status ||
+    !linkOfStandart ||
+    !recognitionDate
+  ) {
     return;
   }
 
   const data = await readData(DATAPATH);
-  console.log(data);
+  let ID = data.length + 1;
 
-  const newItem = { "Sr.No.": v4(), designationNumber, title, status };
+  const newItem = {
+    "Sr.No.": ID++,
+    designationNumber,
+    title,
+    status,
+    recognitionDate,
+    linkOfStandart,
+  };
   data.push(newItem);
   await fs.writeFile(DATAPATH, JSON.stringify(data, null, 2));
   // console.log("New data added successfully");
@@ -25,41 +43,40 @@ const readData = async (path) => {
   return JSON.parse(result);
 };
 
-const links = [];
-
 const linksCollector = async () => {
   const data = await readData(LINKSPATH);
 
+  let browser;
   for (const el of data) {
-    let browser;
-    (async () => {
+    try {
       browser = await remote({
         capabilities: { browserName: "chrome" },
       });
+      const links = [];
 
       await browser.navigateTo(el.link);
 
       const linksArr = await browser.$$("h6 a");
 
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < 2; i++) {
         const link = linksArr[i].getAttribute("href");
         links.push(await link);
       }
 
-      dataCollector(links);
+      await dataCollector(links);
 
       await browser.deleteSession();
-    })().catch((err) => {
+    } catch (err) {
       console.error(err);
       return browser.deleteSession();
-    });
+    }
   }
 };
 
-const dataCollector = () => {
+const dataCollector = async (links) => {
   for (const el of links) {
     let browser;
-    (async () => {
+    try {
       browser = await remote({
         capabilities: { browserName: "chrome" },
       });
@@ -69,17 +86,24 @@ const dataCollector = () => {
       const designationNumber = await browser.$("div h1").getText();
       const title = await browser.$("div h2").getText();
       const status = await browser.$(".col-sm-6").$("span").getText();
-
-      await writeData(designationNumber, title, status);
+      const recognitionDate = await browser
+        .$('[itemprop="releaseDate"]')
+        .getText();
+      const linkOfStandart = await browser.getUrl();
+      await writeData(
+        designationNumber,
+        title,
+        status,
+        recognitionDate,
+        linkOfStandart
+      );
 
       await browser.deleteSession();
-    })().catch((err) => {
+    } catch (err) {
       console.error(err);
       return browser.deleteSession();
-    });
+    }
   }
 };
-
-// linksCollector();
 
 module.exports = { linksCollector };
