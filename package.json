@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/AKutusenko/data-crawling#readme",
   "dependencies": {
-    "uuid": "^8.3.2",
     "webdriverio": "^7.16.15"
   }
 }
