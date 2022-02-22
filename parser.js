@@ -69,16 +69,9 @@ const dataCollector = () => {
       const designationNumber = await browser.$("div h1").getText();
       const title = await browser.$("div h2").getText();
       const status = await browser.$(".col-sm-6").$("span").getText();
-      // console.log(await designationNumber);
-      // console.log(await title);
-      // console.log(await status);
+
       writeData(designationNumber, title, status);
 
-      //  for (let i = 0; i < data.length; i++) {
-      //    const link = data[i].getAttribute("href");
-      //    links.push(await link);
-      //  }
-      // console.table(links);
       await browser.deleteSession();
     })().catch((err) => {
       console.error(err);
