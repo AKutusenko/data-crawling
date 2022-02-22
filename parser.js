@@ -30,7 +30,7 @@ const links = [];
 const linksCollector = async () => {
   const data = await readData(LINKSPATH);
 
-  data.forEach((el) => {
+  for (const el of data) {
     let browser;
     (async () => {
       browser = await remote({
@@ -39,10 +39,10 @@ const linksCollector = async () => {
 
       await browser.navigateTo(el.link);
 
-      const data = await browser.$$("h6 a");
+      const linksArr = await browser.$$("h6 a");
 
-      for (let i = 0; i < 3; i++) {
-        const link = data[i].getAttribute("href");
+      for (let i = 0; i < 4; i++) {
+        const link = linksArr[i].getAttribute("href");
         links.push(await link);
       }
 
@@ -53,11 +53,11 @@ const linksCollector = async () => {
       console.error(err);
       return browser.deleteSession();
     });
-  });
+  }
 };
 
 const dataCollector = () => {
-  links.forEach((el) => {
+  for (const el of links) {
     let browser;
     (async () => {
       browser = await remote({
@@ -70,14 +70,14 @@ const dataCollector = () => {
       const title = await browser.$("div h2").getText();
       const status = await browser.$(".col-sm-6").$("span").getText();
 
-      writeData(designationNumber, title, status);
+      await writeData(designationNumber, title, status);
 
       await browser.deleteSession();
     })().catch((err) => {
       console.error(err);
       return browser.deleteSession();
     });
-  });
+  }
 };
 
 // linksCollector();
