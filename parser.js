@@ -58,6 +58,7 @@ const linksCollector = async () => {
 
       const linksArr = await browser.$$("h6 a");
 
+      //i < 2 задал для теста, потом изменить на i<linksArr.length
       for (let i = 0; i < 2; i++) {
         const link = linksArr[i].getAttribute("href");
         links.push(await link);
