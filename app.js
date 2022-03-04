@@ -1,5 +1,4 @@
-// const path = require("path");
-// const fs = require("fs/promises");
-const { linksCollector } = require("./parser");
+// const { linksCollector } = require("./parser/isoParser");
+const { linksCollector } = require("./parser/newZealandParser");
 
 linksCollector();

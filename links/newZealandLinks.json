@@ -1,0 +1,42 @@
+[
+  {
+    "link": "https://www.standards.govt.nz/search/doSearch?Search=MEDICAL%20DEVICES&start=0&filterby=standards&IndustrySector[]=4&ICSCode=*",
+    "group": "Building Construction and Fire Prevention"
+  },
+  {
+    "link": "https://www.standards.govt.nz/search/doSearch?Search=MEDICAL%20DEVICES&start=0&filterby=standards&IndustrySector[]=7&ICSCode=*",
+    "group": "Business and Trade"
+  },
+  {
+    "link": "https://www.standards.govt.nz/search/doSearch?Search=MEDICAL%20DEVICES&start=0&filterby=standards&IndustrySector[]=10&ICSCode=*",
+    "group": "Consumer and Occupational Safety"
+  },
+  {
+    "link": "https://www.standards.govt.nz/search/doSearch?Search=MEDICAL%20DEVICES&start=0&filterby=standards&IndustrySector[]=16&ICSCode=*",
+    "group": "Energy, Electricity and Gas"
+  },
+  {
+    "link": "https://www.standards.govt.nz/search/doSearch?Search=MEDICAL%20DEVICES&start=0&filterby=standards&IndustrySector[]=22&ICSCode=*",
+    "group": "Environment and Sustainability"
+  },
+  {
+    "link": "https://www.standards.govt.nz/search/doSearch?Search=MEDICAL%20DEVICES&start=0&filterby=standards&IndustrySector[]=25&ICSCode=*",
+    "group": "Healthcare and Community Services"
+  },
+  {
+    "link": "https://www.standards.govt.nz/shop/asnzs-iecieee-62209-15282021/",
+    "group": "Digital and Media"
+  },
+  {
+    "link": "https://www.standards.govt.nz/search/doSearch?Search=MEDICAL%20DEVICES&start=0&filterby=standards&IndustrySector[]=31&ICSCode=*",
+    "group": "Local Government"
+  },
+  {
+    "link": "https://www.standards.govt.nz/shop/asnzs-35512012/",
+    "group": "Manufacturing and Processing"
+  },
+  {
+    "link": "https://www.standards.govt.nz/search/doSearch?Search=MEDICAL%20DEVICES&start=0&filterby=standards&IndustrySector[]=37",
+    "group": "Tourism and Hospitality"
+  }
+]

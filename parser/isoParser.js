@@ -1,8 +1,8 @@
 const { remote } = require("webdriverio");
 const fs = require("fs/promises");
 const path = require("path");
-const LINKSPATH = path.join(__dirname, "links.json");
-const DATAPATH = path.join(__dirname, "data.json");
+const LINKSPATH = path.join(__dirname, "../", "links/isoLinks.json");
+const DATAPATH = path.join(__dirname, "../", "data/isoData.json");
 
 const writeData = async (
   designationNumber,
@@ -34,7 +34,6 @@ const writeData = async (
   };
   data.push(newItem);
   await fs.writeFile(DATAPATH, JSON.stringify(data, null, 2));
-  // console.log("New data added successfully");
   return newItem;
 };
 
